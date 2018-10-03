@@ -1,0 +1,36 @@
+﻿<Window x:Class="ProjectSelah.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ProjectSelah"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="600" Width="800"
+        Loaded="Window_Loaded" Closed="Window_Closed">
+    <Grid>
+        <DataGrid x:Name="gridRecords" HorizontalAlignment="Left" Height="549" Margin="10,10,0,0" VerticalAlignment="Top" Width="286"
+                  ItemsSource="{Binding Items}" SelectedItem="{Binding CurrentItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False"
+                  CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeColumns="False" CanUserResizeRows="False"
+                  RowHeaderWidth="0" Background="#FFFBFBFB">
+            <DataGrid.Columns>
+                <DataGridTemplateColumn Width="*" Header="Song">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <TextBlock Text="{Binding Name}" FontWeight="Bold" Grid.Row="0"/>
+                                <TextBlock Text="{Binding Artist}" Grid.Row="1"/>
+                            </Grid>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button x:Name="btnAdd" Content="Add" HorizontalAlignment="Left" Margin="301,10,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="btnEdit" Content="Edit" HorizontalAlignment="Left" Margin="301,35,0,0" VerticalAlignment="Top" Width="75"/>
+
+    </Grid>
+</Window>

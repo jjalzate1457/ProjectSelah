@@ -1,0 +1,16 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ProjectSelah.Views"
+        xmlns:CustomControls="clr-namespace:ProjectSelah.API.CustomControls" x:Class="ProjectSelah.Views.LiveView"
+        mc:Ignorable="d"
+        Title="LiveView" Height="450" Width="800"
+        Loaded="Window_Loaded" Closing="Window_Closing" WindowStartupLocation="Manual" WindowState="Maximized" WindowStyle="None">
+    <Grid>
+
+        <CustomControls:Presenter x:Name="presenterControl"/>
+
+    </Grid>
+</Window>

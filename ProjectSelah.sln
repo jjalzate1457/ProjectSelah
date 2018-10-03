@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26228.4
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectSelah", "ProjectSelah\ProjectSelah.csproj", "{12BD2AB2-DF51-447C-950D-51E971DCBCBA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Selah Release|Any CPU = Selah Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{12BD2AB2-DF51-447C-950D-51E971DCBCBA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12BD2AB2-DF51-447C-950D-51E971DCBCBA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12BD2AB2-DF51-447C-950D-51E971DCBCBA}.Selah Release|Any CPU.ActiveCfg = Selah Release|Any CPU
+		{12BD2AB2-DF51-447C-950D-51E971DCBCBA}.Selah Release|Any CPU.Build.0 = Selah Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CCECF857-11E3-4A82-BFF0-81ADFEC981A1}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,247 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ProjectSelah"
+        xmlns:CustomControls="clr-namespace:ProjectSelah.API.CustomControls" x:Class="ProjectSelah.MainWindow"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="500" Width="1000"
+        Loaded="Window_Loaded" Closed="Window_Closed">
+    <Grid x:Name="gridMain">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!--Song List-->
+        <DataGrid x:Name="gridRecords" Margin="10,42,10,10"
+                  ItemsSource="{Binding Items}" SelectedItem="{Binding CurrentItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False"
+                  CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeColumns="False" CanUserResizeRows="False"
+                  RowHeaderWidth="0" Background="#FFFEFEFE" BorderBrush="#FF9E9E9E">
+            <DataGrid.Columns>
+                <DataGridTemplateColumn Width="*" Header="Song List">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <ContentControl MouseDoubleClick="ContentControl_MouseDoubleClick">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+                                    <TextBlock Text="{Binding Name}" FontWeight="Bold" Grid.Row="0"/>
+                                    <TextBlock Text="{Binding Artist}" Grid.Row="1"/>
+                                </Grid>
+                            </ContentControl>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Button x:Name="btnAdd" Content="➕" Margin="0,42,34,0" VerticalAlignment="Top" Height="25"
+                Background="{x:Null}" Foreground="#FF6E6E6E" BorderBrush="#FF959595" HorizontalAlignment="Right" Width="25"/>
+        <Button x:Name="btnEdit" Content="✎" Margin="0,42,10,0" VerticalAlignment="Top" Height="25"
+                Background="{x:Null}" Foreground="#FF6E6E6E" BorderBrush="#FF959595" HorizontalAlignment="Right" Width="25"/>
+        <!--Song List-->
+
+        <!--Lyrics-->
+        <DataGrid x:Name="gridNextLyrics" Grid.Column="1" Margin="10,225,10,10"
+            CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeColumns="False" CanUserResizeRows="False"
+            RowHeaderWidth="0" ColumnHeaderHeight="0" Background="#FFFEFEFE" BorderBrush="#FF9E9E9E" 
+            AutoGenerateColumns="false" ItemsSource="{Binding Items}" SelectedItem="{Binding CurrentItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+            <DataGrid.Columns>
+                <DataGridTemplateColumn Width="*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <ContentControl MouseDoubleClick="NextLyrics_DoubleClick">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+
+                                    <TextBlock Text="{Binding Header.Name}" FontWeight="Bold" Grid.Row="0" 
+                                               Background="{Binding Header.Color}"/>
+
+                                    <TextBlock Text="{Binding Stanza}" Grid.Row="1"/>
+                                </Grid>
+                            </ContentControl>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <TextBox x:Name="fieldSongSearch" Height="23" Margin="63,10,10,0" TextWrapping="Wrap" VerticalAlignment="Top" VerticalContentAlignment="Center"
+                 Text="{Binding SearchString, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+        <Label Content="Search:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="23" VerticalContentAlignment="Center"/>
+
+        <DataGrid x:Name="gridCurrentLyrics" Grid.Column="2" Margin="10,227,10,10"
+            CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeColumns="False" CanUserResizeRows="False"
+            RowHeaderWidth="0" ColumnHeaderHeight="0" Background="#FFFEFEFE" BorderBrush="#FF9E9E9E" 
+            AutoGenerateColumns="False" ItemsSource="{Binding Items}" SelectedItem="{Binding CurrentItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" >
+            <DataGrid.Columns>
+                <DataGridTemplateColumn Width="*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <ContentControl>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+
+                                    <TextBlock Text="{Binding Header.Name}" FontWeight="Bold" Grid.Row="0" 
+                                        Background="{Binding Header.Color}"/>
+
+                                    <TextBlock Text="{Binding Stanza}" Grid.Row="1"/>
+                                </Grid>
+                            </ContentControl>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <TextBox Height="23" Margin="46,9,0,0" TextWrapping="Wrap" VerticalAlignment="Top" VerticalContentAlignment="Center" HorizontalAlignment="Left" Width="197" Grid.Column="1"/>
+        <!--Lyrics-->
+
+        <!--Lineup-->
+        <DataGrid x:Name="gridLineup" Height="183" Margin="10,37,10,0" VerticalAlignment="Top"
+            ItemsSource="{Binding Items}" SelectedItem="{Binding CurrentItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False"
+            CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeColumns="False" CanUserResizeRows="False"
+            RowHeaderWidth="0" Background="#FFFEFEFE" BorderBrush="#FF9E9E9E" Grid.Column="1">
+            <DataGrid.Columns>
+                <DataGridTemplateColumn Width="*" Header="Lineup">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="25"/>
+                                    <!--<ColumnDefinition Width="25"/>-->
+                                    <!--<ColumnDefinition Width="25"/>-->
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Text="{Binding Name}" FontWeight="Bold" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+
+                                <Button x:Name="btnRemove" Content="✘" Width="25" Height="25" Grid.Column="1" HorizontalAlignment="Right"
+                                        Background="#FFFEFEFE" Foreground="#FF6E6E6E" BorderBrush="#FF959595"
+                                        Command = "{Binding DataContext.Remove, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}, Mode=FindAncestor}}" CommandParameter="{Binding}"
+                                        Click="BtnLineupRemove_Click"/>
+
+                                <!--<Button x:Name="btnUp" Content="▲" Width="25" Height="25" Grid.Column="2" HorizontalAlignment="Right"
+                                        Background="#FFFEFEFE" Foreground="#FF6E6E6E" BorderBrush="#FF959595"
+                                        Command = "{Binding DataContext.MoveUp, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}, Mode=FindAncestor}}" 
+                                        CommandParameter="{Binding}"/>
+                                
+                                <Button x:Name="btnDown" Content="▼" Width="25" Height="25" Grid.Column="3" HorizontalAlignment="Right"
+                                        Background="#FFFEFEFE" Foreground="#FF6E6E6E" BorderBrush="#FF959595"
+                                        Command = "{Binding DataContext.MoveDown, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}, Mode=FindAncestor}}" 
+                                        CommandParameter="{Binding}"/>-->
+                            </Grid>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Label Content="File:" HorizontalAlignment="Left" Margin="10,9,0,0" VerticalAlignment="Top" Height="23" VerticalContentAlignment="Center" Grid.Column="1"/>
+
+        <Button x:Name="btnLineupNew" Content="📝" Margin="0,9,10,0" VerticalAlignment="Top" Height="23"
+            Background="{x:Null}" Foreground="#FF6E6E6E" BorderBrush="#FF959595" HorizontalAlignment="Right" Width="25" Grid.Column="1"/>
+
+        <Button x:Name="btnLineupOpen" Content="📂" Margin="0,9,34,0" VerticalAlignment="Top" Height="23"
+            Background="{x:Null}" Foreground="#FF6E6E6E" BorderBrush="#FF959595" HorizontalAlignment="Right" Width="25" Grid.Column="1"/>
+
+        <Button x:Name="btnLineupClear" Content="✘" Margin="0,37,10,0" VerticalAlignment="Top" Height="25"
+            Background="{x:Null}" Foreground="#FF6E6E6E" BorderBrush="#FF959595" HorizontalAlignment="Right" Width="25" Grid.Column="1"/>
+
+        <Button x:Name="btnLineupSave" Content="💾" Margin="0,9,58,0" VerticalAlignment="Top" Height="23"
+            Background="{x:Null}" Foreground="#FF6E6E6E" BorderBrush="#FF959595" HorizontalAlignment="Right" Width="25" Grid.Column="1"/>
+        <!--Lineup-->
+
+        <!--Presenter-->
+        <Border BorderBrush="Black" BorderThickness="1" Grid.Column="2" Height="183" Margin="10,37,11,0" VerticalAlignment="Top">
+            <CustomControls:Presenter x:Name="presenterControlRefl" Margin="0"/>
+        </Border>
+
+        <Label x:Name="lblCurrentSongTitle" Content="{Binding Song.Name}" Grid.Column="2" Margin="10,5,134,0" VerticalAlignment="Top" FontWeight="Bold"/>
+
+        <Button x:Name="btnShowLiveView" Content="Live" Margin="0,5,93,0" VerticalAlignment="Top" Height="26"
+            Background="#FF00A300" Foreground="White" BorderBrush="#FF444141" HorizontalAlignment="Right" Width="36" Grid.Column="2" 
+                Click="BtnShowLiveView_Click" FontWeight="Bold"/>
+
+        <Button x:Name="btnClearLiveView" Content="Clear" Margin="0,5,52,0" VerticalAlignment="Top" Height="26"
+            BorderBrush="#FF444141" HorizontalAlignment="Right" Width="36" Grid.Column="2" 
+                Command="{Binding ClearScreenCmd}" FontWeight="Bold">
+            <Button.Style>
+                <Style>
+                    <Setter Property="Button.Foreground" Value="#FFFFFFFF"/>
+                    <Setter Property="Button.Background" Value="#FF2659B2"/>
+                    <!--<Setter Property="Button.Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="Button">
+                                <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1">
+                                    <Grid Background="{TemplateBinding Background}">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Grid>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>-->
+                    <Style.Triggers>
+                        <!--<DataTrigger Binding="{Binding State}" Value="Normal">
+                            <Setter Property="Button.Foreground" Value="#FFFFFFFF"/>
+                            <Setter Property="Button.Background" Value="#FF2659B2"/>
+                        </DataTrigger>-->
+                        <DataTrigger Binding="{Binding State}" Value="BlackScreen">
+                            <Setter Property="Button.Foreground" Value="#FFA2AAB9"/>
+                            <Setter Property="Button.Background" Value="#FF3C4659"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding State}" Value="ClearBlackScreen">
+                            <Setter Property="Button.Foreground" Value="#FFA2AAB9"/>
+                            <Setter Property="Button.Background" Value="#FF3C4659"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding State}" Value="ClearScreen">
+                            <Setter Property="Button.Foreground" Value="#FFFAFF94"/>
+                            <Setter Property="Button.Background" Value="#FF043A97"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
+
+        <Button x:Name="btnBlackLiveView" Content="Black" Margin="0,5,11,0" VerticalAlignment="Top" Height="26"
+            BorderBrush="Black" HorizontalAlignment="Right" Grid.Column="2" Width="36" 
+                Command="{Binding BlackScreenCmd}" FontWeight="Bold" >
+            <Button.Style>
+                <Style>
+                    <Setter Property="Button.Foreground" Value="#FFFFFFFF"/>
+                    <Setter Property="Button.Background" Value="#FF717871"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding State}" Value="Normal">
+                            <Setter Property="Button.Foreground" Value="#FFFFFFFF"/>
+                            <Setter Property="Button.Background" Value="#FF464746"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding State}" Value="BlackScreen">
+                            <Setter Property="Button.Foreground" Value="#FFFAFF94"/>
+                            <Setter Property="Button.Background" Value="#FF2B2B2B"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding State}" Value="ClearBlackScreen">
+                            <Setter Property="Button.Foreground" Value="#FFFAFF94"/>
+                            <Setter Property="Button.Background" Value="#FF2B2B2B"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding State}" Value="ClearScreen">
+                            <Setter Property="Button.Foreground" Value="#FFFFFFFF"/>
+                            <Setter Property="Button.Background" Value="#FF464746"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
+        <!--Presenter-->
+    </Grid>
+</Window>
